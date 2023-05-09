@@ -57,8 +57,9 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         $deletedPhoto = Photo::findOrFail($id);
+        $pathPhoto = public_path().'/storage/photo/'.$deletedPhoto->photo;
 
-        Storage::delete($deletedPhoto->photo);
+        unlink($pathPhoto);
 
         $deletedPhoto->delete();
 
